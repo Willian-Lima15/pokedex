@@ -1,1 +1,14 @@
-<p>pokemon works!</p>
+<form [formGroup]="form">
+  <mat-form-field>
+    <mat-label>Nome:</mat-label>
+    <input required formControlName="name" class="form-control" placeholder="Charmander" type="text" matInput>
+  </mat-form-field>
+  <mat-form-field>
+    <mat-label>Type:</mat-label>
+    <input riquired formControlName="type" class="form-control" placeholder="fire" type="text" matInput>
+  </mat-form-field>
+  <mat-form-field>
+    <mat-label>Height</mat-label>
+    <input required formControlName="height" class="form-control" placeholder="0.5" type="number" matInput>
+  </mat-form-field>
+</form>
