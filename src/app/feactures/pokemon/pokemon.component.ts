@@ -1,7 +1,6 @@
 import { FormComponent } from './../components/form/form.component';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { PokemonModel } from './../../shared/models/pokemon-model';
-import { Observable } from 'rxjs';
 import { PokedexFirestoreService } from './../../core/services/pokedex-firestore.service';
 import { Component, Inject, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
