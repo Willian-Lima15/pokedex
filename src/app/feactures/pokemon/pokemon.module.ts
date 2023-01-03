@@ -1,3 +1,5 @@
+import { ListPokemonComponent } from './../components/list-pokemon/list-pokemon.component';
+import { PokedexFirestoreService } from './../../core/services/pokedex-firestore.service';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
@@ -7,12 +9,16 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
-import { MatDialogModule } from '@angular/material/dialog';
+import { MatCardModule } from '@angular/material/card';
+import { MatDialogModule, MatDialogRef, MatDialog } from '@angular/material/dialog';
+import { FormComponent } from '../components/form/form.component';
 
 
 @NgModule({
   declarations: [
-    PokemonComponent
+    PokemonComponent,
+    FormComponent,
+    ListPokemonComponent
   ],
   imports: [
     CommonModule,
@@ -21,7 +27,17 @@ import { MatDialogModule } from '@angular/material/dialog';
     MatFormFieldModule,
     MatInputModule,
     MatButtonModule,
-    MatDialogModule
-  ]
+    MatDialogModule,
+    MatDialogModule,
+    MatCardModule
+  ],
+  providers: [
+    {
+      provide: MatDialogRef,
+      useValue: {}
+    },
+    PokedexFirestoreService
+ ],
+
 })
 export class PokemonModule { }

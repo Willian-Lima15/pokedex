@@ -1,5 +1,5 @@
 import { FormComponent } from './../components/form/form.component';
-import { MatDialogModule, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { PokemonModel } from './../../shared/models/pokemon-model';
 import { Observable } from 'rxjs';
 import { PokedexFirestoreService } from './../../core/services/pokedex-firestore.service';
@@ -14,7 +14,6 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 export class PokemonComponent implements OnInit {
 
   form!:FormGroup;
-  pokemon$:Observable<PokemonModel>
 
   constructor(
     private formBuilder:FormBuilder,
