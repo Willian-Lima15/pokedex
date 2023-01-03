@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { PokemonModule } from '../../pokemon/pokemon.module';
+import { PokemonModel } from '../../../shared/models/pokemon-model';
 
 
 @Component({
@@ -9,7 +9,7 @@ import { PokemonModule } from '../../pokemon/pokemon.module';
 })
 export class DetailsPokemonComponent implements OnInit {
 
-  @Input() pokemon: PokemonModule;
+  @Input() pokemon: PokemonModel;
   @Output() updatePokemon = new EventEmitter<void>();
   @Output() deletePokemon = new EventEmitter<void>();
 

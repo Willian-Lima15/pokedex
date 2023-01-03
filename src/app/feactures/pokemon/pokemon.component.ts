@@ -1,9 +1,10 @@
+import { Observable } from 'rxjs';
 import { FormComponent } from './../components/form/form.component';
-import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { PokemonModel } from './../../shared/models/pokemon-model';
 import { PokedexFirestoreService } from './../../core/services/pokedex-firestore.service';
 import { Component, Inject, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { tap,filter } from 'rxjs/operators';
 
 @Component({
   selector: 'app-pokemon',
@@ -11,33 +12,50 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
   styleUrls: ['./pokemon.component.css']
 })
 export class PokemonComponent implements OnInit {
-
-  form!:FormGroup;
+  pokemon$:Observable<PokemonModel[]>;
+  selectedPokemon:PokemonModel;
 
   constructor(
-    private formBuilder:FormBuilder,
-    public dialogRef:MatDialogRef<FormComponent>,
-    private pokedexService: PokedexFirestoreService,
-    @Inject(MAT_DIALOG_DATA) private readonly pokemon:PokemonModel
+    private pokedexService:PokedexFirestoreService,
+    private dialog:MatDialog
   ) { }
 
   ngOnInit(): void {
-    this.setForm();
+    this.pokemon$ = this.pokedexService.getAll();
   }
 
-  setForm(){
-    this.form = this.formBuilder.group({
-      name:[this.pokemon.name,[Validators.required]],
-      type:[this.pokemon.type,[Validators.required]],
-      description:[this.pokemon.description,[Validators.required]],
-      height:[this.pokemon.height,[Validators.required]],
-      weight:[this.pokemon.weight,[Validators.required]],
-      imgUrl:[this.pokemon.imgUrl,[Validators.required]]
-    })
+  addPokemon(){
+    const dialogRef = this.dialog.open(FormComponent, {
+      data:{},
+      width:'40%',
+    });
+
+    dialogRef
+      .afterClosed()
+      .pipe(filter(Boolean),tap((res:any)=> this.pokedexService.create(res))
+      )
+      .subscribe();
   }
 
-  submit(){
-    this.dialogRef.close({...this.pokemon,...this.form.value})
+  update(){
+    const dialogRef = this.dialog.open(FormComponent, {
+      data:{...this.selectedPokemon},
+      width:'40%',
+    });
+    dialogRef
+      .afterClosed()
+      .pipe(
+        filter(Boolean),
+        tap((res:any) => this.pokedexService.update(res)),
+        tap((res) => this.selectPokemon(res))
+      )
+      .subscribe();
   }
+
+  selectPokemon(pokemon: PokemonModel){
+    this.selectedPokemon = pokemon;
+  }
+
+
 
 }
