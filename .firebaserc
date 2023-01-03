@@ -1,0 +1,14 @@
+{
+  "targets": {
+    "api-pokedex-9e442": {
+      "hosting": {
+        "pokedex": [
+          "api-pokedex-9e442"
+        ]
+      }
+    }
+  },
+  "projects": {
+    "default": "api-pokedex-9e442"
+  }
+}
