@@ -1,3 +1,4 @@
+import { DetailsPokemonComponent } from './../components/details-pokemon/details-pokemon.component';
 import { ListPokemonComponent } from './../components/list-pokemon/list-pokemon.component';
 import { PokedexFirestoreService } from './../../core/services/pokedex-firestore.service';
 import { NgModule } from '@angular/core';
@@ -18,7 +19,8 @@ import { FormComponent } from '../components/form/form.component';
   declarations: [
     PokemonComponent,
     FormComponent,
-    ListPokemonComponent
+    ListPokemonComponent,
+    DetailsPokemonComponent
   ],
   imports: [
     CommonModule,

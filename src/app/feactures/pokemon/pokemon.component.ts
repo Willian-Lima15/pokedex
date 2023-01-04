@@ -37,7 +37,7 @@ export class PokemonComponent implements OnInit {
       .subscribe();
   }
 
-  update(){
+  updatePokemon(){
     const dialogRef = this.dialog.open(FormComponent, {
       data:{...this.selectedPokemon},
       width:'40%',
@@ -56,6 +56,8 @@ export class PokemonComponent implements OnInit {
     this.selectedPokemon = pokemon;
   }
 
-
+  deletePokemon(){
+    this.pokedexService.delete(this.selectedPokemon.id);
+  }
 
 }
